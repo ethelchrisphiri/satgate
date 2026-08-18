@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Bitcoin Infrastructure Report | SatGate Research</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8fafc; padding: 40px 20px; color: #0f172a; line-height: 1.6; }
+        .box { max-width: 680px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04); border: 1px solid #e2e8f0; }
+        .blurred-content { filter: blur(8px); transition: filter 0.6s ease; }
+        .paywall-box { border: 2px solid #ff9900; padding: 30px; border-radius: 8px; text-align: center; margin-top: -80px; position: relative; background: #ffffff; box-shadow: 0 10px 25px rgba(255, 153, 0, 0.1); }
+        .badge { float: right; padding: 6px 14px; border-radius: 20px; font-size: 11px; background: #64748b; color: white; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        button { background: #ff9900; color: white; border: none; padding: 14px 28px; font-size: 16px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; transition: background 0.2s; }
+        button:hover { background: #e68a00; }
+        button:disabled { background: #cbd5e1; cursor: not-allowed; }
+        .invoice-box { font-family: 'SFMono-Regular', Consolas, "Liberation Mono", Menlo, monospace; font-size: 12px; background: #f8fafc; padding: 14px; border-radius: 6px; word-break: break-all; margin: 15px 0; border: 1px solid #e2e8f0; text-align: left; color: #334155; }
+        .meta-text { color: #64748b; font-size: 14px; margin-bottom: 25px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span id="network-badge" class="badge">🔄 Syncing Node...</span>
+        <h1 style="margin:0 0 8px 0; font-size: 28px; font-weight: 800; letter-spacing: -0.5px;">⚡ SatGate Research</h1>
+        <div class="meta-text">Macro Briefing • Published Aug 18, 2026 • Premium Network Access</div>
+        <hr style="border: 0; border-top: 1px solid #edf2f7; margin-bottom: 30px;">
+
+        <div id="premium-article">
+            <div id="article-body" class="blurred-content">
+                <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 15px;">The 2026 Scaling Shift: Asymmetric Flows into Bitcoin Layer 2</h3>
+                <p>The macroeconomic pressures gripping global markets have triggered an institutional structural shift in digital asset liquidity networks. As Bitcoin consolidates tightly within its multi-month trading range, market participants are heavily prioritizing native Layer 2 scaling protocols to unlock capital efficiency.</p>
+                
+                <p>Recent cryptographic network health indices indicate that raw transaction capacity constraints on the base ledger are altering capital distribution. While legacy smart-contract layers grapple with high maintenance overhead, Bitcoin's scaling pipeline is rapidly leaning on zero-knowledge innovations and dynamic state channels.</p>
+                
+                <p>Infrastructure operators are shifting away from general compute protocols toward specialized, sovereign transaction gateways. This operational shift directly addresses network fee spikes, laying down the technical foundation for censorship-resistant, high-throughput micro-settlement frameworks that operate completely independent of centralized credit clearing houses.</p>
+
+                <h4 style="font-size: 18px; font-weight: 700; margin: 25px 0 10px 0;">⚡ Channel Liquidity & Velocity Dynamics</h4>
+                <p>As node operators rebalance channels to handle rising traffic, the velocity of satoshis across peer-to-peer networks has reached historic levels. This surge in network utilization highlights a critical need for efficient liquidity management utilities that optimize capital deployment without forcing constant, costly on-chain settlement sweeps.</p>
+
+                <p>Furthermore, the integration of advanced routing algorithms is significantly dropping payment failure rates for complex multi-hop transactions. Large capital allocators can now confidently stream micro-payments across the globe instantly, completely bypassing the friction, settlement delays, and compliance overhead typical of legacy cross-border corridors.</p>
+
+                <h4 style="font-size: 18px; font-weight: 700; margin: 25px 0 10px 0;">🔮 Structural Outlook for Q3/Q4</h4>
+                <p>Looking ahead into the latter half of the year, we expect a massive acceleration in native content-monetization middleware deployments. As audiences push back against invasive ad-tracking networks and cumbersome credit-card walls, clean API gateways like SatGate provide an elegant, programmatic alternative: micro-payments for immediate, fractional content consumption.</p>
+                
+                <p>The protocols that successfully balance transaction throughput with robust self-sovereignty security parameters will inevitably capture the lion's share of this emerging financial layer. The transformation is no longer a theoretical debate—it is actively printing to the ledger with every block processed.</p>
+            </div>
+
+            <div id="paywall" class="paywall-box">
+                <h4 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 700;">🔒 Premium Analysis Locked</h4>
+                <p style="font-size:14px; color: #475569; margin-bottom:20px; line-height: 1.5;">To settle network access fees and unlock this operational report, stream 10 Satoshis directly via the Bitcoin Lightning Network.</p>
+                <button id="pay-btn" onclick="getInvoice()">Stream 10 Satoshis</button>
+                
+                <div id="invoice-container" style="display:none;">
+                    <p style="font-size:13px; color: #475569; margin-bottom:5px;">Broadcast this cryptographic invoice via any native Lightning node or wallet:</p>
+                    <div id="invoice-text" class="invoice-box"></div>
+                    <p><small style="color: #ff9900; font-weight:bold; letter-spacing: 0.5px;">⏳ Awaiting state verification from peer nodes...</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const BACKEND_URL = "https://satgate-2x79.onrender.com"; 
+        let checkInterval = null;
+
+        window.onload = async function() {
+            const badge = document.getElementById('network-badge');
+            try {
+                const response = await fetch(`${BACKEND_URL}/`);
+                const data = await response.json();
+                if (data.mode === "live") {
+                    badge.innerText = "● Node Active";
+                    badge.style.background = "#00cc66";
+                } else {
+                    badge.innerText = "● Network Online";
+                    badge.style.background = "#ff9900";
+                }
+            } catch (err) {
+                badge.innerText = "● Node Offline";
+                badge.style.background = "#cc0000";
+            }
+        };
+
+        async function getInvoice() {
+            const payBtn = document.getElementById('pay-btn');
+            payBtn.innerText = "Generating Invoice...";
+            payBtn.disabled = true;
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/generate-invoice`, { method: 'POST' });
+                const data = await response.json();
+
+                if (data.invoice) {
+                    document.getElementById('invoice-text').innerText = data.invoice;
+                    document.getElementById('invoice-container').style.display = 'block';
+                    payBtn.style.display = 'none';
+                    startChecking(data.checking_id);
+                } else {
+                    alert("Network connection timed out.");
+                    resetButton(payBtn);
+                }
+            } catch (err) {
+                alert("Unable to route payment to gateway.");
+                resetButton(payBtn);
+            }
+        }
+
+        function startChecking(checkingId) {
+            checkInterval = setInterval(async () => {
+                try {
+                    const response = await fetch(`${BACKEND_URL}/check-payment/${checkingId}`);
+                    const data = await response.json();
+                    if (data.paid === true) {
+                        clearInterval(checkInterval);
+                        unlockContent();
+                    }
+                } catch (err) {
+                    console.error("Peer sync error:", err);
+                }
+            }, 2000);
+        }
+
+        function unlockContent() {
+            document.getElementById('article-body').classList.remove('blurred-content');
+            const paywall = document.getElementById('paywall');
+            paywall.innerHTML = "<h4 style='color:#00cc66; margin:0; font-weight:700;'>✅ Payment Settled. Access Granted.</h4>";
+            paywall.style.border = "2px solid #00cc66";
+            paywall.style.background = "#f0fdf4";
+            paywall.style.boxShadow = "0 10px 25px rgba(0, 204, 102, 0.05)";
+        }
+
+        function resetButton(btn) {
+            btn.innerText = "Stream 10 Satoshis";
+            btn.disabled = false;
+        }
+    </script>
+</body>
+</html>
