@@ -4,7 +4,7 @@ A high-performance, full-stack Bitcoin Lightning Network micro-paywall applicati
 
 ## Live Production Links
 *   **Interactive API Portal:** [https://satgate-2x79.onrender.com/docs](https://onrender.com)
-*   **Web Application Interface:** [https://satgate-git-main-ethel-phiri.vercel.app/](https://vercel.app)
+*   **Web Application Interface:** [https://satgate-eosin.vercel.app/](https://vercel.app)
 
 
 
