@@ -3,8 +3,8 @@
 A high-performance, full-stack Bitcoin Lightning Network micro-paywall application. This platform enables account-less, non-custodial monetization of digital media by streaming instant micropayments over Layer 2 primitives. Built with a decoupled architecture utilizing an asynchronous Python gateway and an event-driven vanilla client.
 
 ## Live Production Links
-*   **Interactive API Portal:** [https://satgate-2x79.onrender.com/docs](https://onrender.com)
-*   **Web Application Interface:** [https://satgate-eosin.vercel.app/](https://vercel.app)
+*   **Interactive API Portal:** (https://satgate-2x79.onrender.com/docs)
+*   **Web Application Interface:** (https://satgate-git-main-ethel-phiri.vercel.app/)
 
 
 
